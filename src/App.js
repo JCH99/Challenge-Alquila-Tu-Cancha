@@ -7,15 +7,19 @@ import theme from "./theme";
 import { CssBaseline, Container } from "@mui/material";
 import Stepper from "./components/StepperUX";
 import Header from "./components/layout/Header";
+import ContextProvider from "./store/ContextProvider";
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header />
-      <Container>
-        <Stepper />
-      </Container>
-    </ThemeProvider>
+    <ContextProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header />
+        <Container>
+          <Stepper />
+        </Container>
+      </ThemeProvider>
+    </ContextProvider>
   );
 }
 
