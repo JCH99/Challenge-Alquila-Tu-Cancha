@@ -7,7 +7,16 @@ import {
   Stepper,
   Box,
 } from "@mui/material";
-const steps = ["Elegir Modo de Juego", "Create an ad group", "Create an ad"];
+
+import Landing from "./Landing";
+import CRUDJugadores from "./CRUDJugadores";
+import CRUDEquipos from "./CRUDEquipos";
+
+const steps = [
+  "Elegir Modo de Juego",
+  "Crea los equipos",
+  "¡Agrega a tus jugadores!",
+];
 
 export default function StepperUX() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -24,16 +33,29 @@ export default function StepperUX() {
     setActiveStep(0);
   };
 
+  let activeComponent;
+
+  switch (activeStep) {
+    case 0:
+      activeComponent = <Landing />;
+      break;
+    case 1:
+      activeComponent = <CRUDJugadores />;
+      break;
+    case 2:
+      activeComponent = <CRUDEquipos />;
+      break;
+    default:
+      activeComponent = <p>Ocurrió un error. Intente de nuevo más tarde.</p>;
+  }
+
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", mt: 5 }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
-
           return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
             </Step>
           );
         })}
@@ -45,12 +67,12 @@ export default function StepperUX() {
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={handleReset}>Jugar de nuevo!</Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Box sx={{ my: 5, px: 2 }}>{activeComponent}</Box>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
@@ -58,12 +80,12 @@ export default function StepperUX() {
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
-              Back
+              Volver
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
 
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              {activeStep === steps.length - 1 ? "Terminar" : "Siguiente"}
             </Button>
           </Box>
         </React.Fragment>

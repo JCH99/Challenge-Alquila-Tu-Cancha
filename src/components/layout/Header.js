@@ -17,7 +17,7 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Container maxWidth="xl">
-          <Toolbar>
+          <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
               <a href="https://alquilatucancha.com/">
                 <Avatar alt="Alquila Tu Cancha logo" src={logo} />
