@@ -1,0 +1,33 @@
+Primer Brainstorm
+
+*jugadores mundialistas. Aprovechar la api.
+*Material UI
+*Stepper. Pasos:
+    1. bienvenida
+    2. crear equipos
+    3. busqueda jugadores y display equipos dinamica
+    *. Decidir entre redux o React Context
+*A falta de db y auth, implementar localStorage 
+https://apiv3.apifootball.com/?action=get_teams&league_id=28&APIkey=2f59a65696513219222d74e3acb5eea45e439ece9f40613698170fd56baf36a0
+https://apifootball.com/coverage/#World
+
+
+componentes:
+*landing / bienvenida
+*equipos
+    -form crear equipos, max2
+    -lista equipos
+    -equipo: 5slots max ocupados/libres list materialui/progress 1/5 a 5/5 o badge con icon player y color variable! 
+    -equipo: boton eliminar equipo / jugadores / editar nombre.
+    -equipo formado vs completo / ui
+    -logica: no repetir jugador.
+
+*buscador jugador mundialista.
+    -data structure.
+    -accordion materialui para paises + filtro de paises --> se lista nombre, bandera y lista jugadores
+    -jugador: foto, nombre, boton (icono) para agregar a equipo y evaluar datos extra.
+
+*generales:
+    -snackbar para operaciones CRUD.
+    -tooltips en todo boton.
+    -toque final: animaciones.
