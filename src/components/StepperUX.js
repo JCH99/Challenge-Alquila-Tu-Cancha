@@ -67,7 +67,9 @@ export default function StepperUX() {
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Jugar de nuevo!</Button>
+            <Button onClick={handleReset} size="large" variant="contained">
+              Jugar de nuevo!
+            </Button>
           </Box>
         </React.Fragment>
       ) : (
@@ -79,12 +81,14 @@ export default function StepperUX() {
               disabled={activeStep === 0}
               onClick={handleBack}
               sx={{ mr: 1 }}
+              size="large"
+              variant="outlined"
             >
               Volver
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} size="large" variant="contained">
               {activeStep === steps.length - 1 ? "Terminar" : "Siguiente"}
             </Button>
           </Box>

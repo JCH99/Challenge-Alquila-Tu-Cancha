@@ -31,3 +31,5 @@ componentes:
     -snackbar para operaciones CRUD.
     -tooltips en todo boton.
     -toque final: animaciones.
+
+*pendiente: +size Stepper.

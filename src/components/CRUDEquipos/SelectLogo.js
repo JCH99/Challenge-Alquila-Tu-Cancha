@@ -17,12 +17,12 @@ export default function SelectLogo() {
 
   return (
     <FormControl sx={{ minWidth: 120, my: 2 }}>
-      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <InputLabel id="demo-simple-select-label">Elegí un escudo</InputLabel>
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
+        labelId="select-logo-label"
+        id="select-logo"
         value={age}
-        label="Age"
+        label="Elegí un escudo"
         onChange={handleChange}
         sx={{ display: "flex", justifyContent: "center", textAlign: "center" }}
       >

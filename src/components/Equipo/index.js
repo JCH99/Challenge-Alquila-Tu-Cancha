@@ -12,6 +12,7 @@ const index = (props) => {
         p: 1,
         borderColor: "primary.main",
         minWidth: 400,
+        backgroundColor: "background.paper",
       }}
     >
       <Box

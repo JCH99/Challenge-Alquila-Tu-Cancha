@@ -8,16 +8,19 @@ import { CssBaseline, Container } from "@mui/material";
 import Stepper from "./components/StepperUX";
 import Header from "./components/layout/Header";
 import ContextProvider from "./store/ContextProvider";
+import Background from "./components/layout/Background";
 
 function App() {
   return (
     <ContextProvider>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
-        <Container>
-          <Stepper />
-        </Container>
+        <Background>
+          <Header />
+          <Container>
+            <Stepper />
+          </Container>
+        </Background>
       </ThemeProvider>
     </ContextProvider>
   );
