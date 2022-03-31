@@ -40,10 +40,10 @@ export default function StepperUX() {
       activeComponent = <Landing />;
       break;
     case 1:
-      activeComponent = <CRUDJugadores />;
+      activeComponent = <CRUDEquipos />;
       break;
     case 2:
-      activeComponent = <CRUDEquipos />;
+      activeComponent = <CRUDJugadores />;
       break;
     default:
       activeComponent = <p>Ocurrió un error. Intente de nuevo más tarde.</p>;
