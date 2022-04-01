@@ -6,11 +6,11 @@ import { useReducer, createContext } from "react";
 // Team: Nombre, playerElegido[]
 
 export const Context = createContext({
-  gameMode: undefined,
-  JSONData: [],
+  data: [],
   teams: [],
+  gameMode: undefined,
 
-  addJSON: (institutionsArray) => {},
+  addData: (gameMode) => {},
   addTeam: (name) => {},
   removeTeam: (name) => {},
   editTeamName: (name, newName) => {},
@@ -19,13 +19,23 @@ export const Context = createContext({
 });
 
 const defaultState = {
-  gameMode: "modoMundialista", //modoAFA || modoMundialista
+  gameMode: undefined,
   teams: [],
   data: [],
 };
 
 const reducer = (state, action) => {
   if (action.type === "ADD_DATA") {
+    return {
+      ...state,
+      data: action.data,
+    };
+  }
+  if (action.type === "CHANGE_GAME_MODE") {
+    return {
+      ...state,
+      gameMode: action.gameMode,
+    };
   }
 
   if (action.type === "ADD_TEAM") {
@@ -48,8 +58,34 @@ const reducer = (state, action) => {
 const ContextProvider = (props) => {
   const [state, dispatchAction] = useReducer(reducer, defaultState);
 
-  const addDataHandler = (institutionsArray) => {
-    dispatchAction({ type: "ADD_DATA", institutionsArray });
+  const addDataHandler = async (gameMode) => {
+    //prevent re-fetching when selecting current selected mode.
+    if (gameMode !== state.gameMode) {
+      dispatchAction({ type: "CHANGE_GAME_MODE", gameMode });
+      let leagueId;
+
+      if (gameMode === "modoAFA") {
+        leagueId = 44;
+      } else if (gameMode === "modoMundialista") {
+        leagueId = 28;
+      } else {
+        leagueId = -1; //error
+      }
+
+      try {
+        const response = await fetch(
+          `https://apiv3.apifootball.com/?action=get_teams&league_id=${leagueId}&APIkey=${process.env.REACT_APP_API_KEY}`
+        );
+
+        const data = await response.json();
+
+        if (data.hasOwnProperty("error")) {
+          throw new Error("Request failed");
+        }
+        console.log(data);
+        dispatchAction({ type: "ADD_DATA", data });
+      } catch (err) {}
+    }
   };
   const addTeamHandler = (name) => {
     dispatchAction({ type: "ADD_TEAM", name });

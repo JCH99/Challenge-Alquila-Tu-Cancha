@@ -1,11 +1,13 @@
-import * as React from "react";
+import { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-
+import { Context } from "../../store/ContextProvider";
 export default function GameMode(props) {
+  const ctx = useContext(Context);
+
   const stylesBase = { maxWidth: 300, minWidth: 200, m: 2 };
 
   const stylesSelected = {
@@ -13,8 +15,12 @@ export default function GameMode(props) {
     border: 4,
     borderColor: "secondary.main",
   };
+
   return (
-    <Card sx={props.selected ? stylesSelected : stylesBase}>
+    <Card
+      sx={ctx.gameMode === props.gameMode ? stylesSelected : stylesBase}
+      onClick={() => ctx.addData(props.gameMode)}
+    >
       <CardActionArea>
         <CardMedia
           component="img"

@@ -1,10 +1,13 @@
-import React from "react";
+import { useContext } from "react";
 import { Typography, Box } from "@mui/material";
 import GameMode from "./GameMode";
 import modoAFA from "../../images/modoAFA.jpg";
 import modoMundialista from "../../images/modoMundialista.jpg";
+import { Context } from "../../store/ContextProvider";
 
-const index = () => {
+const Index = () => {
+  const ctx = useContext(Context);
+
   return (
     <section>
       <Typography variant="h3" component="h1" align="center" sx={{ mb: 2 }}>
@@ -37,6 +40,7 @@ const index = () => {
           description={
             "sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis,"
           }
+          gameMode={"modoMundialista"}
         />
         <GameMode
           img={modoAFA}
@@ -45,10 +49,11 @@ const index = () => {
           description={
             "sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis,"
           }
+          gameMode={"modoAFA"}
         />
       </Box>
     </section>
   );
 };
 
-export default index;
+export default Index;

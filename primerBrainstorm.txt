@@ -32,4 +32,4 @@ componentes:
     -tooltips en todo boton.
     -toque final: animaciones.
 
-*pendiente: +size Stepper.
+*pendiente: +size Stepper. // error handling
