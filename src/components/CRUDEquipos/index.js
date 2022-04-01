@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../../store/ContextProvider";
 import { Typography, Box, TextField, Button } from "@mui/material";
-import Equipo from "../Equipo";
+import Team from "../Team";
 import SelectLogo from "./SelectLogo";
-const index = () => {
+
+const CRUDEquipos = () => {
+  const defaultValues = { name: "", logo: "" };
+  const [teamData, setTeamData] = useState(defaultValues);
+  const ctx = useContext(Context);
+
+  const emptyForm = teamData.name === "" || teamData.logo === "";
+  const disableButton = ctx.teams.length === 2 || emptyForm;
+
+  const handleNameChange = (event) => {
+    setTeamData({ ...teamData, name: event.target.value });
+  };
+
+  const handleLogoChange = (event) => {
+    setTeamData({ ...teamData, logo: event.target.value });
+  };
+
+  const submitNewTeam = (event) => {
+    //double-check
+    if (!disableButton) {
+      ctx.addTeam(teamData.name, teamData.logo);
+      setTeamData(defaultValues);
+    }
+  };
+
+  const logos = ctx.data.map((institution) => institution.team_badge);
+
   return (
     <section>
       <Typography variant="h5" align="center" sx={{ mb: 2 }}>
@@ -21,9 +48,23 @@ const index = () => {
           my: 4,
         }}
       >
-        <TextField label="Ingresa un nombre" />
-        <SelectLogo />
-        <Button variant="contained">Crear equipo</Button>
+        <TextField
+          label="Ingresa un nombre"
+          value={teamData.name}
+          onChange={handleNameChange}
+        />
+        <SelectLogo
+          logos={logos}
+          logo={teamData.logo}
+          handleChange={handleLogoChange}
+        />
+        <Button
+          variant="contained"
+          disabled={disableButton}
+          onClick={submitNewTeam}
+        >
+          Crear equipo
+        </Button>
       </Box>
       <Box
         sx={{
@@ -32,11 +73,12 @@ const index = () => {
           justifyContent: "space-evenly",
         }}
       >
-        <Equipo />
-        <Equipo />
+        {ctx.teams.map((team, index) => (
+          <Team team={team} key={index} />
+        ))}
       </Box>
     </section>
   );
 };
 
-export default index;
+export default CRUDEquipos;

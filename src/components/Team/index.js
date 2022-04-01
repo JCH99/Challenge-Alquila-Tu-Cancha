@@ -2,7 +2,9 @@ import React from "react";
 import ListPlayers from "./ListPlayers";
 import { Box, Typography, Divider, Avatar } from "@mui/material";
 import PlayersNumbers from "./PlayersNumber";
-const index = (props) => {
+const Team = (props) => {
+  const borderColor =
+    props.team.players.length === 5 ? "primary.main" : "secondary.main";
   return (
     <Box
       sx={{
@@ -10,7 +12,7 @@ const index = (props) => {
         border: 2,
         borderRadius: 3,
         p: 1,
-        borderColor: "primary.main",
+        borderColor: borderColor,
         minWidth: 400,
         backgroundColor: "background.paper",
       }}
@@ -26,17 +28,18 @@ const index = (props) => {
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Avatar
             sx={{ width: 64, height: 64 }}
-            alt="Remy Sharp"
-            src="https://apiv3.apifootball.com/badges/549_tigre.jpg"
+            alt="Cuadro de Futbol"
+            src={props.team.logo}
+            variant="square"
           />
-          <Typography variant="h6">los tipitos</Typography>
+          <Typography variant="h6">{props.team.name}</Typography>
         </Box>
-        <PlayersNumbers players={5} />
+        <PlayersNumbers players={props.team.players.length} />
       </Box>
       {props.showPlayers && <Divider />}
-      {props.showPlayers && <ListPlayers />}
+      {props.showPlayers && <ListPlayers players={props.team.players} />}
     </Box>
   );
 };
 
-export default index;
+export default Team;

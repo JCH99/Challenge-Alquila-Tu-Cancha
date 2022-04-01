@@ -1,9 +1,9 @@
 import React from "react";
 import { Typography, Box, Button } from "@mui/material";
-import Equipo from "../Equipo";
+import Team from "../Team";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 
-const index = () => {
+const FinalTeams = () => {
   return (
     <section>
       <Typography variant="h5" align="center" sx={{ mb: 2 }}>
@@ -35,11 +35,11 @@ const index = () => {
           justifyContent: "space-evenly",
         }}
       >
-        <Equipo showPlayers />
-        <Equipo showPlayers />
+        <Team showPlayers />
+        <Team showPlayers />
       </Box>
     </section>
   );
 };
 
-export default index;
+export default FinalTeams;

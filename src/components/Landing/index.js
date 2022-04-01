@@ -3,7 +3,7 @@ import GameMode from "./GameMode";
 import modoAFA from "../../images/modoAFA.jpg";
 import modoMundialista from "../../images/modoMundialista.jpg";
 
-const Index = () => {
+const Landing = () => {
   return (
     <section>
       <Typography variant="h3" component="h1" align="center" sx={{ mb: 2 }}>
@@ -52,4 +52,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Landing;

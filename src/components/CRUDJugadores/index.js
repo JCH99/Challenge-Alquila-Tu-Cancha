@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../../store/ContextProvider";
 import { Typography, Box } from "@mui/material";
 import SearchAccordions from "./SearchAccordions";
-import Equipo from "../Equipo";
-const index = () => {
+import Team from "../Team";
+const CRUDJugadores = () => {
+  const ctx = useContext(Context);
   return (
     <section>
       <Typography variant="h5" align="center" sx={{ mb: 2 }}>
@@ -19,11 +21,12 @@ const index = () => {
           justifyContent: "space-evenly",
         }}
       >
-        <Equipo showPlayers />
-        <Equipo showPlayers />
+        {ctx.teams.map((team, index) => (
+          <Team showPlayers team={team} key={index} />
+        ))}
       </Box>
     </section>
   );
 };
 
-export default index;
+export default CRUDJugadores;

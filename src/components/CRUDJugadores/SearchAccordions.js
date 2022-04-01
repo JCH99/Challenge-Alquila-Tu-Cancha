@@ -3,8 +3,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Avatar, Typography, Grid, Box } from "@mui/material";
-import ListPlayers from "../Equipo/ListPlayers";
+import { Avatar, Typography, Grid } from "@mui/material";
+import ListPlayers from "../Team/ListPlayers";
 const Player = (props) => {
   return (
     <Accordion

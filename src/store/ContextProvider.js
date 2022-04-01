@@ -39,6 +39,17 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "ADD_TEAM") {
+    const teamsUpdated = [...state.teams];
+    teamsUpdated.push({
+      name: action.name,
+      logo: action.logo,
+      players: [],
+    });
+
+    return {
+      ...state,
+      teams: teamsUpdated,
+    };
   }
 
   if (action.type === "REMOVE_TEAM") {
@@ -82,13 +93,15 @@ const ContextProvider = (props) => {
         if (data.hasOwnProperty("error")) {
           throw new Error("Request failed");
         }
-        console.log(data);
+
         dispatchAction({ type: "ADD_DATA", data });
       } catch (err) {}
     }
   };
-  const addTeamHandler = (name) => {
-    dispatchAction({ type: "ADD_TEAM", name });
+  const addTeamHandler = (name, logo) => {
+    if (state.teams.length < 2) {
+      dispatchAction({ type: "ADD_TEAM", name, logo });
+    }
   };
   const removeTeamHandler = (name) => {
     dispatchAction({ type: "REMOVE_TEAM", name });
