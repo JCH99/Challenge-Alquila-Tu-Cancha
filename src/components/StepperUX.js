@@ -11,11 +11,12 @@ import {
 import Landing from "./Landing";
 import CRUDJugadores from "./CRUDJugadores";
 import CRUDEquipos from "./CRUDEquipos";
+import FinalTeams from "./FinalTeams";
 
 const steps = [
   "Elegir Modo de Juego",
-  "Crea los equipos",
-  "¡Agrega a tus jugadores!",
+  "Crear los equipos",
+  "¡Agregar a tus jugadores!",
 ];
 
 export default function StepperUX() {
@@ -45,6 +46,9 @@ export default function StepperUX() {
     case 2:
       activeComponent = <CRUDJugadores />;
       break;
+    case 3:
+      activeComponent = <FinalTeams />;
+      break;
     default:
       activeComponent = <p>Ocurrió un error. Intente de nuevo más tarde.</p>;
   }
@@ -62,10 +66,18 @@ export default function StepperUX() {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+          <Box sx={{ my: 5, px: 2 }}>{activeComponent}</Box>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+              size="large"
+              variant="outlined"
+            >
+              Volver
+            </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset} size="large" variant="contained">
               Jugar de nuevo!

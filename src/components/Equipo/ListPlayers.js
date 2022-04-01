@@ -15,7 +15,11 @@ import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 
 export default function ListPlayers(props) {
   return (
-    <List disablePadding sx={{ width: "100%", bgcolor: "background.paper" }}>
+    <List
+      disablePadding
+      dense={props.dense}
+      sx={{ width: "100%", bgcolor: "background.paper" }}
+    >
       <ListItem
         secondaryAction={
           <IconButton edge="end" aria-label="delete">

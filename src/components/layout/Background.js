@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import texture from "../../images/texture.svg";
+
 const Background = (props) => {
   return (
     <Box
@@ -12,7 +12,6 @@ const Background = (props) => {
         backgroundPosition: "center",
       }}
     >
-      {/* background by SVGBackgrounds.com */}
       {props.children}
     </Box>
   );
