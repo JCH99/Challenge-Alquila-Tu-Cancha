@@ -1,13 +1,9 @@
-import { useContext } from "react";
 import { Typography, Box } from "@mui/material";
 import GameMode from "./GameMode";
 import modoAFA from "../../images/modoAFA.jpg";
 import modoMundialista from "../../images/modoMundialista.jpg";
-import { Context } from "../../store/ContextProvider";
 
 const Index = () => {
-  const ctx = useContext(Context);
-
   return (
     <section>
       <Typography variant="h3" component="h1" align="center" sx={{ mb: 2 }}>

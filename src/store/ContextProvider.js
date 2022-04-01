@@ -3,7 +3,7 @@ import { useReducer, createContext } from "react";
 // (json api): institucion[]
 // institucion: nombre, bandera, jugadores[]
 // playerElegido: Nombre Imagen Posicion Id
-// Team: Nombre, playerElegido[]
+// Team: Nombre, Cuadro, players[]
 
 export const Context = createContext({
   data: [],

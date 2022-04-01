@@ -1,17 +1,11 @@
-import * as React from "react";
-import {
-  Typography,
-  Button,
-  StepLabel,
-  Step,
-  Stepper,
-  Box,
-} from "@mui/material";
-
+import React, { useContext } from "react";
+import { Button, StepLabel, Step, Stepper, Box } from "@mui/material";
+import { Context } from "../store/ContextProvider";
 import Landing from "./Landing";
 import CRUDJugadores from "./CRUDJugadores";
 import CRUDEquipos from "./CRUDEquipos";
 import FinalTeams from "./FinalTeams";
+import disableNextStep from "../helpers/disableNextStep";
 
 const steps = [
   "Elegir Modo de Juego",
@@ -21,6 +15,10 @@ const steps = [
 
 export default function StepperUX() {
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const ctx = useContext(Context);
+
+  const nextStepDisabled = disableNextStep(activeStep, ctx.gameMode, ctx.teams);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -70,7 +68,6 @@ export default function StepperUX() {
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
-              disabled={activeStep === 0}
               onClick={handleBack}
               sx={{ mr: 1 }}
               size="large"
@@ -100,7 +97,12 @@ export default function StepperUX() {
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button onClick={handleNext} size="large" variant="contained">
+            <Button
+              onClick={handleNext}
+              size="large"
+              variant="contained"
+              disabled={nextStepDisabled}
+            >
               {activeStep === steps.length - 1 ? "Terminar" : "Siguiente"}
             </Button>
           </Box>
