@@ -9,16 +9,16 @@ import {
 } from "@mui/material";
 
 export default function DialogAddToTeam(props) {
-  const { onClose, selectedValue, open, availableTeams } = props;
+  const { onClose, open, availableTeams, onChoice } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   const handleListItemClick = (value) => {
-    onClose(value);
+    onChoice(value);
   };
-
+  console.log(open);
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>¿En qué equipo va a jugar?</DialogTitle>

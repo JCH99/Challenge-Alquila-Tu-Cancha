@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment } from "react";
 import translatePosition from "../../helpers/translatePosition";
 import {
   List,
@@ -10,7 +10,7 @@ import {
   Divider,
 } from "@mui/material";
 
-import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ListPlayers(props) {
   return (
@@ -19,31 +19,28 @@ export default function ListPlayers(props) {
       dense={props.dense}
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      {props.players.map((player) => {
-        const playerType = translatePosition(player.player_type);
+      {props.players.map((player, index) => {
+        const playerType = translatePosition(player.position);
         return (
-          <>
+          <Fragment key={index}>
             <ListItem
               secondaryAction={
                 <IconButton edge="end" aria-label="delete">
-                  <AddIcon />
+                  <DeleteIcon />
                 </IconButton>
               }
             >
               <ListItemAvatar>
                 <Avatar
                   sx={{ width: 48, height: 48, mr: 2 }}
-                  src={player.player_image}
-                  alt={`${player.player_name} photo`}
+                  src={player.image}
+                  alt={`${player.name} photo`}
                 />
               </ListItemAvatar>
-              <ListItemText
-                primary={player.player_name}
-                secondary={playerType}
-              />
+              <ListItemText primary={player.name} secondary={playerType} />
             </ListItem>
             <Divider />
-          </>
+          </Fragment>
         );
       })}
     </List>

@@ -34,3 +34,4 @@ componentes:
 
 *pendiente: +size Stepper. // error handling
 *nombres equipos distintos.
+*AGREGAR PLAYER TO TEAM Y CONSTRAINS

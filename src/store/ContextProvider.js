@@ -9,6 +9,7 @@ export const Context = createContext({
   data: [],
   teams: [],
   gameMode: undefined,
+  loadingData: false,
 
   addData: (gameMode) => {},
   addTeam: (name) => {},
@@ -19,9 +20,10 @@ export const Context = createContext({
 });
 
 const defaultState = {
-  gameMode: undefined,
-  teams: [],
   data: [],
+  teams: [],
+  gameMode: undefined,
+  loadingData: false,
 };
 
 const reducer = (state, action) => {
@@ -38,8 +40,15 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "CHANGE_LOADING_STATE") {
+    return {
+      ...state,
+      loadingData: action.state,
+    };
+  }
+
   if (action.type === "ADD_TEAM") {
-    const uid = Date.now();
+    const uid = `teamId-${Date.now()}`;
     const teamsUpdated = [...state.teams];
     teamsUpdated.push({
       id: uid,
@@ -61,6 +70,29 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "ADD_PLAYER") {
+    const { playerObj } = action;
+    //check if player was already selected
+    const confirmedPlayers = state.teams.map((team) => team.players).flat();
+    const unconfirmedPlayer =
+      confirmedPlayers.findIndex((player) => player.id === playerObj.id) === -1;
+    if (unconfirmedPlayer) {
+      const selectedTeam = state.teams.find((team) => team.id === action.team);
+
+      selectedTeam.players.push(playerObj);
+
+      const unselectedTeam = state.teams.find(
+        (team) => team.id !== action.team
+      );
+      console.log([selectedTeam, unselectedTeam]);
+      return {
+        ...state,
+        teams: [selectedTeam, unselectedTeam],
+      };
+    } else {
+      return {
+        ...state,
+      };
+    }
   }
 
   if (action.type === "REMOVE_PLAYER") {
@@ -75,6 +107,7 @@ const ContextProvider = (props) => {
     //prevent re-fetching when selecting current selected mode.
     if (gameMode !== state.gameMode) {
       dispatchAction({ type: "CHANGE_GAME_MODE", gameMode });
+      dispatchAction({ type: "CHANGE_LOADING_STATE", state: true });
       let leagueId;
 
       if (gameMode === "modoAFA") {
@@ -95,7 +128,7 @@ const ContextProvider = (props) => {
         if (data.hasOwnProperty("error")) {
           throw new Error("Request failed");
         }
-
+        dispatchAction({ type: "CHANGE_LOADING_STATE", state: false });
         dispatchAction({ type: "ADD_DATA", data });
       } catch (err) {}
     }
@@ -120,6 +153,7 @@ const ContextProvider = (props) => {
 
   const context = {
     gameMode: state.gameMode,
+    loadingData: state.loadingData,
     data: state.data,
     teams: state.teams,
     addData: addDataHandler,

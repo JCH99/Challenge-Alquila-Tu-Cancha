@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { Button, StepLabel, Step, Stepper, Box } from "@mui/material";
+import {
+  Button,
+  StepLabel,
+  Step,
+  Stepper,
+  Box,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import { Context } from "../store/ContextProvider";
 import Landing from "./Landing";
 import CRUDJugadores from "./CRUDJugadores";
@@ -33,6 +41,8 @@ export default function StepperUX() {
   };
 
   let activeComponent;
+  const nextButtonText =
+    activeStep === steps.length - 1 ? "Terminar" : "Siguiente";
 
   switch (activeStep) {
     case 0:
@@ -103,7 +113,11 @@ export default function StepperUX() {
               variant="contained"
               disabled={nextStepDisabled}
             >
-              {activeStep === steps.length - 1 ? "Terminar" : "Siguiente"}
+              {ctx.loadingData ? (
+                <CircularProgress color="primary" />
+              ) : (
+                nextButtonText
+              )}
             </Button>
           </Box>
         </React.Fragment>

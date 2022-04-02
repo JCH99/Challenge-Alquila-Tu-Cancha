@@ -15,50 +15,61 @@ const Player = (props) => {
   const { player } = props;
   const ctx = useContext(Context);
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
+
+  const playerType = translatePosition(player.player_type);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
-    setSelectedValue(value);
+  const handleOptionClicked = (idTeam) => {
+    setOpen(false);
+    ctx.addPlayerToTeam(idTeam, {
+      name: player.player_name,
+      image: player.player_image,
+      position: playerType,
+      id: player.player_key,
+    });
+  };
+
+  const handleClose = () => {
     setOpen(false);
   };
 
   const availableTeamsToAdd = ctx.teams.filter(
     (team) => team.players.length < 5
   );
-  const playerType = translatePosition(player.player_type);
 
   return (
-    <ListItem
-      sx={{
-        backgroundColor: "background.paper",
-        borderRadius: 4,
-      }}
-      secondaryAction={
-        <IconButton edge="end" aria-label="add_player">
-          <AddIcon />
-        </IconButton>
-      }
-      onClick={handleClickOpen}
-    >
-      <ListItemAvatar>
-        <Avatar
-          sx={{ width: 48, height: 48, mr: 2 }}
-          src={player.player_image}
-          alt={`${player.player_name} photo`}
-        />
-      </ListItemAvatar>
-      <ListItemText primary={player.player_name} secondary={playerType} />
+    <>
+      <ListItem
+        sx={{
+          backgroundColor: "background.paper",
+          borderRadius: 4,
+        }}
+        secondaryAction={
+          <IconButton edge="end" aria-label="add_player">
+            <AddIcon />
+          </IconButton>
+        }
+        onClick={handleClickOpen}
+      >
+        <ListItemAvatar>
+          <Avatar
+            sx={{ width: 48, height: 48, mr: 2 }}
+            src={player.player_image}
+            alt={`${player.player_name} photo`}
+          />
+        </ListItemAvatar>
+        <ListItemText primary={player.player_name} secondary={playerType} />
+      </ListItem>
       <DialogAddToTeam
-        selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
         availableTeams={availableTeamsToAdd}
+        onChoice={handleOptionClicked}
       />
-    </ListItem>
+    </>
   );
 };
 
