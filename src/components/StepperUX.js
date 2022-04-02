@@ -26,7 +26,12 @@ export default function StepperUX() {
 
   const ctx = useContext(Context);
 
-  const nextStepDisabled = disableNextStep(activeStep, ctx.gameMode, ctx.teams);
+  const nextStepDisabled = disableNextStep(
+    activeStep,
+    ctx.gameMode,
+    ctx.loadingData,
+    ctx.teams
+  );
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -114,7 +119,7 @@ export default function StepperUX() {
               disabled={nextStepDisabled}
             >
               {ctx.loadingData ? (
-                <CircularProgress color="primary" />
+                <CircularProgress size={25} color="primary" thickness={5} />
               ) : (
                 nextButtonText
               )}
