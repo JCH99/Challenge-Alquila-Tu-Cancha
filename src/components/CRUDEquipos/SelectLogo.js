@@ -11,7 +11,7 @@ import {
 export default function SelectLogo(props) {
   return (
     <FormControl sx={{ minWidth: 120, my: 2 }}>
-      <InputLabel id="demo-simple-select-label">Elegí un escudo</InputLabel>
+      <InputLabel id="simple-select-label">Elegí un escudo</InputLabel>
       <Select
         labelId="select-logo-label"
         id="select-logo"

@@ -1,4 +1,5 @@
 import * as React from "react";
+import translatePosition from "../../helpers/translatePosition";
 import {
   List,
   ListItem,
@@ -9,9 +10,7 @@ import {
   Divider,
 } from "@mui/material";
 
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function ListPlayers(props) {
   return (
@@ -20,38 +19,33 @@ export default function ListPlayers(props) {
       dense={props.dense}
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      <ListItem
-        secondaryAction={
-          <IconButton edge="end" aria-label="delete">
-            <ImageIcon />
-          </IconButton>
-        }
-      >
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <Divider />
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <Divider />
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
+      {props.players.map((player) => {
+        const playerType = translatePosition(player.player_type);
+        return (
+          <>
+            <ListItem
+              secondaryAction={
+                <IconButton edge="end" aria-label="delete">
+                  <AddIcon />
+                </IconButton>
+              }
+            >
+              <ListItemAvatar>
+                <Avatar
+                  sx={{ width: 48, height: 48, mr: 2 }}
+                  src={player.player_image}
+                  alt={`${player.player_name} photo`}
+                />
+              </ListItemAvatar>
+              <ListItemText
+                primary={player.player_name}
+                secondary={playerType}
+              />
+            </ListItem>
+            <Divider />
+          </>
+        );
+      })}
     </List>
   );
 }

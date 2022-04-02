@@ -27,7 +27,7 @@ const Team = (props) => {
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Avatar
-            sx={{ width: 64, height: 64 }}
+            sx={{ width: 64, height: 64, mr: 1 }}
             alt="Cuadro de Futbol"
             src={props.team.logo}
             variant="square"

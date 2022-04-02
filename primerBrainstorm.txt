@@ -33,3 +33,4 @@ componentes:
     -toque final: animaciones.
 
 *pendiente: +size Stepper. // error handling
+*nombres equipos distintos.
