@@ -36,15 +36,17 @@ const SearchPlayersSelect = () => {
         teams={teamsData}
         team={selectedTeam}
       />
-      <Grid container spacing={2} sx={{ mb: 4 }}>
-        {selectedTeamData.players.map((player) => {
-          return (
-            <Grid item xs={3}>
-              <Player player={player} />
-            </Grid>
-          );
-        })}
-      </Grid>
+      {selectedTeam !== "" && (
+        <Grid container spacing={2} sx={{ mb: 4 }}>
+          {selectedTeamData.players.map((player, index) => {
+            return (
+              <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <Player player={player} />
+              </Grid>
+            );
+          })}
+        </Grid>
+      )}
     </Box>
   );
 };
