@@ -39,8 +39,10 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "ADD_TEAM") {
+    const uid = Date.now();
     const teamsUpdated = [...state.teams];
     teamsUpdated.push({
+      id: uid,
       name: action.name,
       logo: action.logo,
       players: [],

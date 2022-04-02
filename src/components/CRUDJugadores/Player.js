@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../store/ContextProvider";
 import {
   ListItem,
   ListItemText,
@@ -9,10 +10,27 @@ import {
 
 import AddIcon from "@mui/icons-material/Add";
 import translatePosition from "../../helpers/translatePosition";
-
+import DialogAddToTeam from "./DialogAddToTeam";
 const Player = (props) => {
   const { player } = props;
+  const ctx = useContext(Context);
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setSelectedValue(value);
+    setOpen(false);
+  };
+
+  const availableTeamsToAdd = ctx.teams.filter(
+    (team) => team.players.length < 5
+  );
   const playerType = translatePosition(player.player_type);
+
   return (
     <ListItem
       sx={{
@@ -24,6 +42,7 @@ const Player = (props) => {
           <AddIcon />
         </IconButton>
       }
+      onClick={handleClickOpen}
     >
       <ListItemAvatar>
         <Avatar
@@ -33,6 +52,12 @@ const Player = (props) => {
         />
       </ListItemAvatar>
       <ListItemText primary={player.player_name} secondary={playerType} />
+      <DialogAddToTeam
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleClose}
+        availableTeams={availableTeamsToAdd}
+      />
     </ListItem>
   );
 };
