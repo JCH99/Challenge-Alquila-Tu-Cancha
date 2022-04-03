@@ -43,6 +43,7 @@ export default function StepperUX() {
 
   const handleReset = () => {
     setActiveStep(0);
+    ctx.resetGame();
   };
 
   let activeComponent;
@@ -67,7 +68,7 @@ export default function StepperUX() {
   }
 
   return (
-    <Box sx={{ width: "100%", mt: 5 }}>
+    <Box sx={{ width: "100%", py: 5 }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           return (

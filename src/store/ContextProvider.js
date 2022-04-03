@@ -17,6 +17,7 @@ export const Context = createContext({
   editTeam: (teamId, newName, newLogo) => {},
   addPlayerToTeam: (team, playerObj) => {},
   removePlayerFromTeam: (teamId, playerId) => {},
+  resetGame: () => {},
 });
 
 const defaultState = {
@@ -31,6 +32,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       data: action.data,
+      teams: [],
     };
   }
   if (action.type === "CHANGE_GAME_MODE") {
@@ -45,6 +47,10 @@ const reducer = (state, action) => {
       ...state,
       loadingData: action.state,
     };
+  }
+
+  if (action.type === "RESET_GAME") {
+    return defaultState;
   }
 
   if (action.type === "ADD_TEAM") {
@@ -209,6 +215,9 @@ const ContextProvider = (props) => {
   const removePlayerFromTeamHandler = (teamId, playerId) => {
     dispatchAction({ type: "REMOVE_PLAYER", teamId, playerId });
   };
+  const resetGameHandler = () => {
+    dispatchAction({ type: "RESET_GAME" });
+  };
 
   const context = {
     gameMode: state.gameMode,
@@ -221,6 +230,7 @@ const ContextProvider = (props) => {
     editTeam: editTeamHandler,
     addPlayerToTeam: addPlayerToTeamHandler,
     removePlayerFromTeam: removePlayerFromTeamHandler,
+    resetGame: resetGameHandler,
   };
 
   return <Context.Provider value={context}>{props.children}</Context.Provider>;
