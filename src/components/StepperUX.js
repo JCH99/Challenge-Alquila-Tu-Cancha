@@ -6,7 +6,6 @@ import {
   Stepper,
   Box,
   CircularProgress,
-  Typography,
 } from "@mui/material";
 import { Context } from "../store/ContextProvider";
 import Landing from "./Landing";
@@ -14,6 +13,7 @@ import CRUDJugadores from "./CRUDJugadores";
 import CRUDEquipos from "./CRUDEquipos";
 import FinalTeams from "./FinalTeams";
 import disableNextStep from "../helpers/disableNextStep";
+import SnackbarError from "./ui/SnackbarError";
 
 const steps = [
   "Elegir Modo de Juego",
@@ -69,66 +69,69 @@ export default function StepperUX() {
   }
 
   return (
-    <Box sx={{ width: "100%", py: 5 }}>
-      <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
-          return (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Box sx={{ my: 5, px: 2 }}>{activeComponent}</Box>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-              size="large"
-              variant="outlined"
-            >
-              Volver
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset} size="large" variant="contained">
-              Jugar de nuevo!
-            </Button>
-          </Box>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Box sx={{ my: 5, px: 2 }}>{activeComponent}</Box>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-              size="large"
-              variant="outlined"
-            >
-              Volver
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
+    <>
+      <Box sx={{ width: "100%", py: 5 }}>
+        <Stepper activeStep={activeStep}>
+          {steps.map((label, index) => {
+            return (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+        {activeStep === steps.length ? (
+          <React.Fragment>
+            <Box sx={{ my: 5, px: 2 }}>{activeComponent}</Box>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+                size="large"
+                variant="outlined"
+              >
+                Volver
+              </Button>
+              <Box sx={{ flex: "1 1 auto" }} />
+              <Button onClick={handleReset} size="large" variant="contained">
+                Jugar de nuevo!
+              </Button>
+            </Box>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Box sx={{ my: 5, px: 2 }}>{activeComponent}</Box>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+                size="large"
+                variant="outlined"
+              >
+                Volver
+              </Button>
+              <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button
-              onClick={handleNext}
-              size="large"
-              variant="contained"
-              disabled={nextStepDisabled}
-            >
-              {ctx.loadingData ? (
-                <CircularProgress size={27} color="primary" thickness={5} />
-              ) : (
-                nextButtonText
-              )}
-            </Button>
-          </Box>
-        </React.Fragment>
-      )}
-    </Box>
+              <Button
+                onClick={handleNext}
+                size="large"
+                variant="contained"
+                disabled={nextStepDisabled}
+              >
+                {ctx.loadingData ? (
+                  <CircularProgress size={27} color="primary" thickness={5} />
+                ) : (
+                  nextButtonText
+                )}
+              </Button>
+            </Box>
+          </React.Fragment>
+        )}
+      </Box>
+      <SnackbarError error={ctx.APIError} />
+    </>
   );
 }

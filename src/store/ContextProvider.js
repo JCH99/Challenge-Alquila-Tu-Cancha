@@ -35,7 +35,6 @@ const reducer = (state, action) => {
       ...state,
       data: action.data,
       teams: [],
-      APIError: false,
     };
   }
   if (action.type === "CHANGE_GAME_MODE") {
@@ -59,7 +58,7 @@ const reducer = (state, action) => {
   if (action.type === "API_ERROR") {
     return {
       ...state,
-      APIError: true,
+      APIError: action.error,
     };
   }
 
@@ -183,6 +182,8 @@ const ContextProvider = (props) => {
     if (gameMode !== state.gameMode) {
       dispatchAction({ type: "CHANGE_GAME_MODE", gameMode });
       dispatchAction({ type: "CHANGE_LOADING_STATE", state: true });
+      dispatchAction({ type: "API_ERROR", error: false });
+
       let leagueId;
 
       if (gameMode === "modoAFA") {
@@ -207,7 +208,7 @@ const ContextProvider = (props) => {
         dispatchAction({ type: "ADD_DATA", data });
       } catch (err) {
         dispatchAction({ type: "CHANGE_LOADING_STATE", state: false });
-        dispatchAction({ type: "API_ERROR" });
+        dispatchAction({ type: "API_ERROR", error: true });
       }
     }
   };
