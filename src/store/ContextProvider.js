@@ -16,7 +16,7 @@ export const Context = createContext({
   removeTeam: (name) => {},
   editTeamName: (name, newName) => {},
   addPlayerToTeam: (team, playerObj) => {},
-  removePlayerFromTeam: (team, playerId) => {},
+  removePlayerFromTeam: (teamId, playerId) => {},
 });
 
 const defaultState = {
@@ -104,6 +104,28 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "REMOVE_PLAYER") {
+    const selectedTeamIndex = state.teams.findIndex(
+      (team) => team.id === action.teamId
+    );
+
+    const updatedSelectedTeam = state.teams[selectedTeamIndex];
+    const updatedPlayers = updatedSelectedTeam.players.filter(
+      (player) => player.id !== action.playerId
+    );
+    updatedSelectedTeam.players = updatedPlayers;
+
+    const unselectedTeamIndex = state.teams.findIndex(
+      (team) => team.id !== action.teamId
+    );
+    const unselectedTeam = state.teams[unselectedTeamIndex];
+
+    const updatedTeams = [];
+    updatedTeams[selectedTeamIndex] = updatedSelectedTeam;
+    updatedTeams[unselectedTeamIndex] = unselectedTeam;
+    return {
+      ...state,
+      teams: updatedTeams,
+    };
   }
   return state;
 };
@@ -155,8 +177,8 @@ const ContextProvider = (props) => {
   const addPlayerToTeamHandler = (team, playerObj) => {
     dispatchAction({ type: "ADD_PLAYER", team, playerObj });
   };
-  const removePlayerFromTeamHandler = (team, playerId) => {
-    dispatchAction({ type: "REMOVE_PLAYER", team, playerId });
+  const removePlayerFromTeamHandler = (teamId, playerId) => {
+    dispatchAction({ type: "REMOVE_PLAYER", teamId, playerId });
   };
 
   const context = {

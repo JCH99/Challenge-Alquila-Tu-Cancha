@@ -38,7 +38,11 @@ const Team = (props) => {
       </Box>
       {props.showPlayers && playersLength > 0 && <Divider />}
       {props.showPlayers && (
-        <ListPlayers players={props.team.players} deletable={props.deletable} />
+        <ListPlayers
+          players={props.team.players}
+          teamId={props.team.id}
+          deletable={props.deletable}
+        />
       )}
     </Box>
   );

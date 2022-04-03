@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { Context } from "../../store/ContextProvider";
 import translatePosition from "../../helpers/translatePosition";
 import {
   List,
@@ -13,6 +14,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ListPlayers(props) {
+  const ctx = useContext(Context);
   return (
     <List
       disablePadding
@@ -26,7 +28,13 @@ export default function ListPlayers(props) {
             <ListItem
               secondaryAction={
                 props.deletable && (
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() =>
+                      ctx.removePlayerFromTeam(props.teamId, player.id)
+                    }
+                  >
                     <DeleteIcon />
                   </IconButton>
                 )
