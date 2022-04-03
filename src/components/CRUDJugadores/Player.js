@@ -6,16 +6,19 @@ import {
   ListItemAvatar,
   Avatar,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 import translatePosition from "../../helpers/translatePosition";
 import DialogAddToTeam from "./DialogAddToTeam";
+import playerAvailable from "../../helpers/playerAvailable";
+
 const Player = (props) => {
   const { player } = props;
   const ctx = useContext(Context);
   const [open, setOpen] = useState(false);
-
+  const playerIsAvailable = playerAvailable(player.player_key, ctx.teams);
   const playerType = translatePosition(player.player_type);
 
   const handleClickOpen = () => {
@@ -48,9 +51,13 @@ const Player = (props) => {
           borderRadius: 4,
         }}
         secondaryAction={
-          <IconButton edge="end" aria-label="add_player">
-            <AddIcon />
-          </IconButton>
+          playerIsAvailable && (
+            <Tooltip title="Agregar jugador">
+              <IconButton edge="end" aria-label="add_player">
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+          )
         }
         onClick={handleClickOpen}
       >

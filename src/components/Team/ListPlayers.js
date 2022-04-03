@@ -9,6 +9,7 @@ import {
   Avatar,
   IconButton,
   Divider,
+  Tooltip,
 } from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -28,15 +29,17 @@ export default function ListPlayers(props) {
             <ListItem
               secondaryAction={
                 props.deletable && (
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() =>
-                      ctx.removePlayerFromTeam(props.teamId, player.id)
-                    }
-                  >
-                    <DeleteIcon />
-                  </IconButton>
+                  <Tooltip title="Eliminar jugador">
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() =>
+                        ctx.removePlayerFromTeam(props.teamId, player.id)
+                      }
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
                 )
               }
             >
