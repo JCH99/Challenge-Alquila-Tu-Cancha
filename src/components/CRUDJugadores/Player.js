@@ -52,14 +52,13 @@ const Player = (props) => {
         }}
         secondaryAction={
           playerIsAvailable && (
-            <Tooltip title="Agregar jugador">
+            <Tooltip title="Agregar jugador" onClick={handleClickOpen}>
               <IconButton edge="end" aria-label="add_player">
                 <AddIcon />
               </IconButton>
             </Tooltip>
           )
         }
-        onClick={handleClickOpen}
       >
         <ListItemAvatar>
           <Avatar

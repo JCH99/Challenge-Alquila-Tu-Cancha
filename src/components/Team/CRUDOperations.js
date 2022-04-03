@@ -26,7 +26,7 @@ const CRUDOperations = (props) => {
       <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
         <Button
           variant="outlined"
-          startIcon={<ClearIcon />}
+          startIcon={<EditIcon />}
           color="secondary"
           onClick={handleClickOpen}
         >
@@ -34,7 +34,7 @@ const CRUDOperations = (props) => {
         </Button>
         <Button
           variant="outlined"
-          startIcon={<EditIcon />}
+          startIcon={<ClearIcon />}
           color="secondary"
           onClick={() => ctx.removeTeam(props.team.id)}
         >
