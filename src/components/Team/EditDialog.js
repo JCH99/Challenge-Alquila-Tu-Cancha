@@ -1,11 +1,15 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Box,
+} from "@mui/material";
+
 import SelectLogo from "../CRUDEquipos/SelectLogo";
 
 export default function EditDialog(props) {
@@ -35,22 +39,28 @@ export default function EditDialog(props) {
           Cambiá el nombre o cuadro de tu equipo sin necesidad de borrarlo y
           volver a agregar jugadores.
         </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Ingresa un nombre"
-          type="text"
-          fullWidth
-          variant="standard"
-          value={teamData.name}
-          onChange={handleNameChange}
-        />
-        <SelectLogo
-          logos={props.logos}
-          logo={teamData.logo}
-          handleChange={handleLogoChange}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Ingresa un nombre"
+            type="text"
+            fullWidth
+            value={teamData.name}
+            onChange={handleNameChange}
+          />
+          <SelectLogo
+            logos={props.logos}
+            logo={teamData.logo}
+            handleChange={handleLogoChange}
+          />
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, Grid } from "@mui/material";
 import Team from "../Team";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { Context } from "../../store/ContextProvider";
@@ -19,6 +19,7 @@ const FinalTeams = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
+          mb: 8,
         }}
       >
         <a
@@ -31,17 +32,13 @@ const FinalTeams = () => {
         </a>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <Grid container spacing={{ xs: 6, lg: 12 }}>
         {ctx.teams.map((team, index) => (
-          <Team showPlayers team={team} key={index} />
+          <Grid item key={index} xs={12} md={6}>
+            <Team showPlayers team={team} key={index} />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </section>
   );
 };

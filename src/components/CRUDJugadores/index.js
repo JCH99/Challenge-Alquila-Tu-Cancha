@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../../store/ContextProvider";
-import { Typography, Box } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import SearchPlayersSelect from "./SearchPlayersSelect";
 import Team from "../Team";
 const CRUDJugadores = () => {
@@ -16,18 +16,13 @@ const CRUDJugadores = () => {
       </Typography>
       <SearchPlayersSelect />
 
-      {/* <SearchAccordions institutions={ctx.data} /> */}
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <Grid container spacing={{ xs: 6, lg: 12 }}>
         {ctx.teams.map((team, index) => (
-          <Team showPlayers team={team} key={index} deletable />
+          <Grid item key={index} xs={12} md={6}>
+            <Team showPlayers team={team} key={index} deletable />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </section>
   );
 };

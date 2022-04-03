@@ -10,12 +10,10 @@ const Team = (props) => {
   return (
     <Box
       sx={{
-        m: 2,
         border: 2,
         borderRadius: 3,
         p: 1.5,
         borderColor: borderColor,
-        minWidth: 400,
         backgroundColor: "background.paper",
       }}
     >

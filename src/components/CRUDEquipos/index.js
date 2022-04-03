@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../store/ContextProvider";
-import { Typography, Box, TextField, Button } from "@mui/material";
+import { Typography, Box, TextField, Button, Grid } from "@mui/material";
 import Team from "../Team";
 import SelectLogo from "./SelectLogo";
 
@@ -66,17 +66,13 @@ const CRUDEquipos = () => {
           Crear equipo
         </Button>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <Grid container spacing={{ xs: 6, lg: 12 }}>
         {ctx.teams.map((team, index) => (
-          <Team teamCRUD team={team} key={index} />
+          <Grid item key={index} xs={12} md={6}>
+            <Team teamCRUD team={team} />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </section>
   );
 };
