@@ -37,4 +37,4 @@ componentes:
 *AGREGAR PLAYER TO TEAM Y CONSTRAINS
 *q no se swapeen los teams al agregar.
 *feedback errores!
-*reset functionality!!
+*reset functionality!! y reset cuando cambia modo

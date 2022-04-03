@@ -74,7 +74,7 @@ const CRUDEquipos = () => {
         }}
       >
         {ctx.teams.map((team, index) => (
-          <Team team={team} key={index} />
+          <Team teamCRUD team={team} key={index} />
         ))}
       </Box>
     </section>

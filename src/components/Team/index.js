@@ -2,6 +2,8 @@ import React from "react";
 import ListPlayers from "./ListPlayers";
 import { Box, Typography, Divider, Avatar } from "@mui/material";
 import PlayersNumbers from "./PlayersNumber";
+import CRUDOperations from "./CRUDOperations";
+
 const Team = (props) => {
   const playersLength = props.team.players.length;
   const borderColor = playersLength === 5 ? "primary.main" : "secondary.main";
@@ -11,7 +13,7 @@ const Team = (props) => {
         m: 2,
         border: 2,
         borderRadius: 3,
-        p: 1,
+        p: 1.5,
         borderColor: borderColor,
         minWidth: 400,
         backgroundColor: "background.paper",
@@ -36,6 +38,12 @@ const Team = (props) => {
         </Box>
         <PlayersNumbers players={props.team.players.length} />
       </Box>
+      {props.teamCRUD && (
+        <>
+          <Divider sx={{ my: 1.5 }} />
+          <CRUDOperations team={props.team} />
+        </>
+      )}
       {props.showPlayers && playersLength > 0 && <Divider />}
       {props.showPlayers && (
         <ListPlayers

@@ -12,9 +12,9 @@ export const Context = createContext({
   loadingData: false,
 
   addData: (gameMode) => {},
-  addTeam: (name) => {},
-  removeTeam: (name) => {},
-  editTeamName: (name, newName) => {},
+  addTeam: (name, logo) => {},
+  removeTeam: (teamId) => {},
+  editTeam: (teamId, newName, newLogo) => {},
   addPlayerToTeam: (team, playerObj) => {},
   removePlayerFromTeam: (teamId, playerId) => {},
 });
@@ -64,9 +64,38 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "REMOVE_TEAM") {
+    const teamsUpdated = state.teams.filter(
+      (team) => team.id !== action.teamId
+    );
+
+    return {
+      ...state,
+      teams: teamsUpdated,
+    };
   }
 
   if (action.type === "EDIT_TEAM") {
+    const { teamId, newName, newLogo } = action;
+
+    const selectedTeamIndex = state.teams.findIndex(
+      (team) => team.id === teamId
+    );
+    const updatedSelectedTeam = state.teams[selectedTeamIndex];
+    updatedSelectedTeam.name = newName;
+    updatedSelectedTeam.logo = newLogo;
+
+    const unselectedTeamIndex = state.teams.findIndex(
+      (team) => team.id !== teamId
+    );
+    const unselectedTeam = state.teams[unselectedTeamIndex];
+
+    const updatedTeams = [];
+    updatedTeams[selectedTeamIndex] = updatedSelectedTeam;
+    updatedTeams[unselectedTeamIndex] = unselectedTeam;
+    return {
+      ...state,
+      teams: updatedTeams,
+    };
   }
 
   if (action.type === "ADD_PLAYER") {
@@ -168,11 +197,11 @@ const ContextProvider = (props) => {
       dispatchAction({ type: "ADD_TEAM", name, logo });
     }
   };
-  const removeTeamHandler = (name) => {
-    dispatchAction({ type: "REMOVE_TEAM", name });
+  const removeTeamHandler = (teamId) => {
+    dispatchAction({ type: "REMOVE_TEAM", teamId });
   };
-  const editTeamNameHandler = (name, newName) => {
-    dispatchAction({ type: "EDIT_TEAM", name, newName });
+  const editTeamHandler = (teamId, newName, newLogo) => {
+    dispatchAction({ type: "EDIT_TEAM", teamId, newName, newLogo });
   };
   const addPlayerToTeamHandler = (team, playerObj) => {
     dispatchAction({ type: "ADD_PLAYER", team, playerObj });
@@ -189,7 +218,7 @@ const ContextProvider = (props) => {
     addData: addDataHandler,
     addTeam: addTeamHandler,
     removeTeam: removeTeamHandler,
-    editTeamName: editTeamNameHandler,
+    editTeam: editTeamHandler,
     addPlayerToTeam: addPlayerToTeamHandler,
     removePlayerFromTeam: removePlayerFromTeamHandler,
   };
