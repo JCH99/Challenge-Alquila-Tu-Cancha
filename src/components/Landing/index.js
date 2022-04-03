@@ -2,7 +2,7 @@ import { Typography, Box } from "@mui/material";
 import GameMode from "./GameMode";
 import modoAFA from "../../images/modoAFA.jpg";
 import modoMundialista from "../../images/modoMundialista.jpg";
-
+import StepItem from "./StepItem";
 const Landing = () => {
   return (
     <section>
@@ -10,15 +10,18 @@ const Landing = () => {
         ATC Dream Match
       </Typography>
       <Typography variant="body1" align="center" sx={{ mb: 2 }}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit nemo
-        repellat voluptatem cumque! Corrupti doloribus beatae neque
-        reprehenderit! Officiis ut beatae, officia excepturi vero ipsa corrupti
-        reiciendis numquam sed, dolorem omnis enim dolorum natus, modi impedit
-        placeat laboriosam perspiciatis architecto aut illo eaque blanditiis
-        sint itaque necessitatibus. Minus officia atque alias voluptatem
-        deleniti placeat quis molestias, quasi dignissimos nihil sunt dolore ab,
-        eius quaerat, minima illo molestiae? Blanditiis, recusandae eligendi?
+        ¿Alguna vez soñaste con ver un partido de fútbol en donde se enfrenten
+        tus jugadores favoritos? Imaginate poder armar dos equipos de 5
+        jugadores cada uno, en donde no tengas ninguna limitación. Con esta
+        aplicación podrás realizarlo en 3 simples pasos.
       </Typography>
+      <Box component="ul" sx={{ listStyle: "none", p: 0 }}>
+        <StepItem text={"Elegí el modo de juego."} />
+        <StepItem text={"Creá tus equipos con un nombre y un cuadro."} />
+        <StepItem
+          text={"¡Completa el dreamteam con los jugadores que quieras!"}
+        />
+      </Box>
       <Typography variant="h5" align="center" sx={{ mb: 2 }}>
         Elegí el modo de juego
       </Typography>
@@ -34,7 +37,7 @@ const Landing = () => {
           imgAlt={"Modo de juego jugadores mundialistas"}
           title={"Jugadores Mundialistas"}
           description={
-            "sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis,"
+            "Podrás elegir 10 jugadores pertenecientes a los equipos clasificados al Mundial Qatar 2022."
           }
           gameMode={"modoMundialista"}
         />
@@ -43,7 +46,7 @@ const Landing = () => {
           imgAlt={"Modo de juego liga argentina"}
           title={"Jugadores Liga Argentina"}
           description={
-            "sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis, sunt dolore ab, eius quaerat, minima illo molestiae? Blanditiis,"
+            "Podrás elegir 10 jugadores pertenecientes a los equipos de la Primera División del Futbol Argentino."
           }
           gameMode={"modoAFA"}
         />

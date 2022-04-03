@@ -3,8 +3,8 @@ import ListPlayers from "./ListPlayers";
 import { Box, Typography, Divider, Avatar } from "@mui/material";
 import PlayersNumbers from "./PlayersNumber";
 const Team = (props) => {
-  const borderColor =
-    props.team.players.length === 5 ? "primary.main" : "secondary.main";
+  const playersLength = props.team.players.length;
+  const borderColor = playersLength === 5 ? "primary.main" : "secondary.main";
   return (
     <Box
       sx={{
@@ -36,8 +36,10 @@ const Team = (props) => {
         </Box>
         <PlayersNumbers players={props.team.players.length} />
       </Box>
-      {props.showPlayers && <Divider />}
-      {props.showPlayers && <ListPlayers players={props.team.players} />}
+      {props.showPlayers && playersLength > 0 && <Divider />}
+      {props.showPlayers && (
+        <ListPlayers players={props.team.players} deletable={props.deletable} />
+      )}
     </Box>
   );
 };

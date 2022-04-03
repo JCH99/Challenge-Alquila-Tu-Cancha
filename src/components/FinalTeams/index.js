@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Typography, Box, Button } from "@mui/material";
 import Team from "../Team";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import { Context } from "../../store/ContextProvider";
 
 const FinalTeams = () => {
+  const ctx = useContext(Context);
+
   return (
     <section>
       <Typography variant="h5" align="center" sx={{ mb: 2 }}>
@@ -35,8 +38,9 @@ const FinalTeams = () => {
           justifyContent: "space-evenly",
         }}
       >
-        <Team showPlayers />
-        <Team showPlayers />
+        {ctx.teams.map((team, index) => (
+          <Team showPlayers team={team} key={index} />
+        ))}
       </Box>
     </section>
   );

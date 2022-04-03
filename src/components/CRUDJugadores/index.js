@@ -25,7 +25,7 @@ const CRUDJugadores = () => {
         }}
       >
         {ctx.teams.map((team, index) => (
-          <Team showPlayers team={team} key={index} />
+          <Team showPlayers team={team} key={index} deletable />
         ))}
       </Box>
     </section>

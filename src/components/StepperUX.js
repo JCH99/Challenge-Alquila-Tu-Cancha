@@ -119,7 +119,7 @@ export default function StepperUX() {
               disabled={nextStepDisabled}
             >
               {ctx.loadingData ? (
-                <CircularProgress size={25} color="primary" thickness={5} />
+                <CircularProgress size={27} color="primary" thickness={5} />
               ) : (
                 nextButtonText
               )}

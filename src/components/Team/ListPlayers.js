@@ -25,9 +25,11 @@ export default function ListPlayers(props) {
           <Fragment key={index}>
             <ListItem
               secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
+                props.deletable && (
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                )
               }
             >
               <ListItemAvatar>
@@ -39,7 +41,7 @@ export default function ListPlayers(props) {
               </ListItemAvatar>
               <ListItemText primary={player.name} secondary={playerType} />
             </ListItem>
-            <Divider />
+            {index + 1 !== props.players.length && <Divider />}
           </Fragment>
         );
       })}
