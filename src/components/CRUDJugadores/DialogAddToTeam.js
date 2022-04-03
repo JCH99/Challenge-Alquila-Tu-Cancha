@@ -22,7 +22,7 @@ export default function DialogAddToTeam(props) {
   const handleListItemClick = (value) => {
     onChoice(value);
   };
-  console.log(open);
+
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>¿En qué equipo va a jugar?</DialogTitle>
