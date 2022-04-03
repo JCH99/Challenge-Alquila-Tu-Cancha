@@ -1,6 +1,13 @@
 # Challenge-Alquila-Tu-Cancha
 
-Challenge realizado para el puesto de React DEV en Alquila Tu Cancha.
+Challenge realizado en 5 días para el puesto de React DEV en Alquila Tu Cancha.
+
+# ¿Como correr el proyecto?
+
+Clona el repositorio, agrega el .env con la siguiente variable:
+REACT_APP_API_KEY=(pedirme la clave privada)
+Luego corre npm install y luego npm run. La aplicación iniciará localmente en el localhost 3000 y la data se consumirá directamente de la API proporcionada en el pdf del challenge.
+Ante eventuales fallas de la API, tengo copias en local de los json correspondientes.
 
 # Getting Started with Create React App
 
