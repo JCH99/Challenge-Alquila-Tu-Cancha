@@ -56,7 +56,7 @@ const Player = (props) => {
       >
         <ListItemAvatar>
           <Avatar
-            sx={{ width: 48, height: 48, mr: 2 }}
+            sx={{ width: 52, height: 52, mr: 2 }}
             src={player.player_image}
             alt={`${player.player_name} photo`}
           />

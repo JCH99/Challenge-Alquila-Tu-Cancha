@@ -76,17 +76,25 @@ const reducer = (state, action) => {
     const unconfirmedPlayer =
       confirmedPlayers.findIndex((player) => player.id === playerObj.id) === -1;
     if (unconfirmedPlayer) {
-      const selectedTeam = state.teams.find((team) => team.id === action.team);
+      //so they dont swap order
+      const selectedTeamIndex = state.teams.findIndex(
+        (team) => team.id === action.team
+      );
 
-      selectedTeam.players.push(playerObj);
+      const updatedSelectedTeam = state.teams[selectedTeamIndex];
+      updatedSelectedTeam.players.push(playerObj);
 
-      const unselectedTeam = state.teams.find(
+      const unselectedTeamIndex = state.teams.findIndex(
         (team) => team.id !== action.team
       );
-      console.log([selectedTeam, unselectedTeam]);
+      const unselectedTeam = state.teams[unselectedTeamIndex];
+
+      const updatedTeams = [];
+      updatedTeams[selectedTeamIndex] = updatedSelectedTeam;
+      updatedTeams[unselectedTeamIndex] = unselectedTeam;
       return {
         ...state,
-        teams: [selectedTeam, unselectedTeam],
+        teams: updatedTeams,
       };
     } else {
       return {
