@@ -10,6 +10,7 @@ export const Context = createContext({
   teams: [],
   gameMode: undefined,
   loadingData: false,
+  APIError: false,
 
   addData: (gameMode) => {},
   addTeam: (name, logo) => {},
@@ -25,6 +26,7 @@ const defaultState = {
   teams: [],
   gameMode: undefined,
   loadingData: false,
+  APIError: false,
 };
 
 const reducer = (state, action) => {
@@ -33,6 +35,7 @@ const reducer = (state, action) => {
       ...state,
       data: action.data,
       teams: [],
+      APIError: false,
     };
   }
   if (action.type === "CHANGE_GAME_MODE") {
@@ -51,6 +54,13 @@ const reducer = (state, action) => {
 
   if (action.type === "RESET_GAME") {
     return defaultState;
+  }
+
+  if (action.type === "API_ERROR") {
+    return {
+      ...state,
+      APIError: true,
+    };
   }
 
   if (action.type === "ADD_TEAM") {
@@ -195,7 +205,10 @@ const ContextProvider = (props) => {
         }
         dispatchAction({ type: "CHANGE_LOADING_STATE", state: false });
         dispatchAction({ type: "ADD_DATA", data });
-      } catch (err) {}
+      } catch (err) {
+        dispatchAction({ type: "CHANGE_LOADING_STATE", state: false });
+        dispatchAction({ type: "API_ERROR" });
+      }
     }
   };
   const addTeamHandler = (name, logo) => {
@@ -224,6 +237,7 @@ const ContextProvider = (props) => {
     loadingData: state.loadingData,
     data: state.data,
     teams: state.teams,
+    APIError: state.APIError,
     addData: addDataHandler,
     addTeam: addTeamHandler,
     removeTeam: removeTeamHandler,

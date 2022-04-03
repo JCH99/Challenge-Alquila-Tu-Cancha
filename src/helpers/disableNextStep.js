@@ -1,4 +1,10 @@
-const disableNextStep = (activeStep, gameMode, loadingData, teams) => {
+const disableNextStep = (
+  activeStep,
+  gameMode,
+  loadingData,
+  teams,
+  APIError
+) => {
   let disableNextStep;
   let confirmedPlayers = 0;
 
@@ -7,7 +13,7 @@ const disableNextStep = (activeStep, gameMode, loadingData, teams) => {
   }
 
   if (activeStep === 0) {
-    disableNextStep = loadingData || gameMode === undefined;
+    disableNextStep = loadingData || gameMode === undefined || APIError;
   } else if (activeStep === 1) {
     disableNextStep = teams.length < 2;
   } else if (activeStep === 2) {

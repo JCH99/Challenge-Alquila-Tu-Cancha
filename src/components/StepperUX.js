@@ -30,7 +30,8 @@ export default function StepperUX() {
     activeStep,
     ctx.gameMode,
     ctx.loadingData,
-    ctx.teams
+    ctx.teams,
+    ctx.APIError
   );
 
   const handleNext = () => {
