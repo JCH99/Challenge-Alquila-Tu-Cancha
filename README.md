@@ -5,8 +5,8 @@ La aplicación permite crear 2 equipos con jugadores varios a elección.\
 Posee funcionalidades CRUD completas.
 Desarrollado con\
 
-- [x] ReactJS
-- [x] MaterialUI
+- ReactJS
+- MaterialUI
 
 # ¿Como correr el proyecto?
 
